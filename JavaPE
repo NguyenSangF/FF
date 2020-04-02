@@ -1,0 +1,107 @@
+public class Test {
+
+    static void showMenu() {
+        System.out.println("1. Add a new Course");
+        System.out.println("2. Update course by hours");
+        System.out.println("3. Print Check");
+        System.out.println("4. Exit");
+
+    }
+
+    public static void main(String[] args) {
+        CourseList c = new CourseList();
+
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            showMenu();
+            System.out.println("Choice: ?");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    /*
+                     boolean validPass = false; //boolean kiem tra hop le
+                     String pass; //Khai bao bien pass ben ngoai do while de co the su dung cho cac lenh ben duoi do while
+                     do {
+                     System.out.println("Nhap pass");
+                     pass = sc.nextLine();
+                     String regex = "^[a-zA-Z0-9]{8,12}$";
+                     Pattern pattern = Pattern.compile(regex);
+                     Matcher matcher = pattern.matcher(pass);
+                     if (matcher.matches()) {
+                     validPass = true;
+                     } else {
+                     validPass = false;
+                     System.out.println("Not valid..please enter again");
+                     }
+                     } while (!validPass); //repeat when password is not valid
+                     */
+                    boolean checkName = false;
+                    String name;
+                    do {
+                        System.out.println("Nhap name");
+                        sc.nextLine();
+                        name = sc.nextLine();
+                        String regex = "(.|\\s)*\\S(.|\\s)*";
+                        Pattern pattern = Pattern.compile(regex);
+                        Matcher matcher = pattern.matcher(name);
+                        if (matcher.matches()) {
+                            checkName = true;
+                        } else {
+                            checkName = false;
+                            System.err.println("khác null");
+                        }
+                    } while (!checkName); 
+//                    System.out.println("Nhap hours");
+//                    boolean checkH = false;
+//                    int hourse;
+//                    do {
+//                        System.out.println("Nhap hourse");
+//                        sc.nextLine();
+//                        hourse = sc.nextInt();
+//                        String regex = "(^[123]$)";
+//                        Pattern pattern = Pattern.compile(regex);
+//                        Matcher matcher = pattern.matcher(hourse);
+//                        if (matcher.matches()) {
+//                            checkName = true;
+//                        } else {
+//                            checkName = false;
+//                            System.err.println("khác null");
+//                        }
+//                    } while (!checkName); 
+//                    
+                    System.out.println("Nhap hourse");
+                    
+                    int hourse;
+                    do{
+                        hourse = sc.nextInt();
+                        
+                        if ((hourse < 1) || (hourse > 3)){
+                            System.out.println("Nhap lai  ");
+                        }
+                    }while((hourse < 1) || (hourse > 3));
+                    
+                    c.addCourse(name, hourse);
+                    break;
+                case 2:
+                    System.out.println("Nhap OldHours để in tất cả các Course's Hours = OldHours");
+                    int OldHours = sc.nextInt();
+                    System.out.println("Nhap Hours để cập nhât Course's Hours= newHour");
+                    int newHourse = sc.nextInt();
+                    c.UpdateCourse(OldHours, newHourse);
+                    break;
+
+                case 3:
+                    c.print();
+                    break;
+                case 4:
+                    System.out.println("Goodbye!");
+                    break;
+                default:
+                    System.out.println("Bạn nên chọn choice phù hợp");
+            }
+
+        } while (choice != 4);
+
+    }
+}
